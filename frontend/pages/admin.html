@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RepairHub — Admin</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <style>
+    .notif-wrapper { position: relative; }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div class="auth-wrapper" id="admin-login-screen">
+  <div class="auth-card animate-in">
+    <div class="brand-mark">
+      <div class="icon">🔧</div>
+      <span>RepairHub</span>
+    </div>
+    <h1>Admin Panel</h1>
+    <p class="subtitle">Sign in with your admin credentials</p>
+    <form id="admin-login-form">
+      <div class="form-group">
+        <label for="a-email">Email</label>
+        <input id="a-email" type="email" required placeholder="admin@repairhub.com" autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label for="a-password">Password</label>
+        <input id="a-password" type="password" required placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn btn-primary btn-full" id="admin-login-btn">
+        <span class="btn-label">Sign In</span>
+        <span class="spinner hidden" id="admin-spinner"></span>
+      </button>
+    </form>
+    <p class="mt-2 text-center" style="font-size:13px;color:var(--text-light)">
+      <a href="index.html">← Customer portal</a>
+    </p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-layout hidden" id="admin-panel">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="s-icon">🔧</div>
+      Repair<span class="s-dot">Hub</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item active" id="nav-dashboard" href="#" onclick="showView('dashboard');return false">
+        <span class="nav-icon">📊</span> Dashboard
+      </a>
+      <a class="nav-item" id="nav-orders" href="#" onclick="showView('orders');return false">
+        <span class="nav-icon">📋</span> All Orders
+      </a>
+      <a class="nav-item" id="nav-customers" href="#" onclick="showView('customers');return false">
+        <span class="nav-icon">👥</span> Customers
+      </a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="notif-wrapper">
+        <button class="notif-btn" id="notif-btn" title="Notifications">
+          🔔
+          <span class="notif-badge hidden" id="notif-badge">0</span>
+        </button>
+        <div class="notif-dropdown hidden" id="notif-dropdown">
+          <div class="notif-header">
+            Notifications
+            <button class="btn btn-sm btn-ghost" id="mark-all-read" style="font-size:11px;padding:4px 8px">Mark all read</button>
+          </div>
+          <div id="notif-list"><div class="notif-empty">No notifications</div></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:10px 12px;margin-top:4px">
+        <a href="profile.html" style="display:flex;align-items:center;gap:8px;flex:1;min-width:0;text-decoration:none">
+          <div class="avatar" id="admin-avatar" style="border-color:var(--brand);color:var(--brand)">A</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;color:rgba(255,255,255,.85);font-weight:600" id="admin-name">Admin</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.4)">Administrator</div>
+          </div>
+        </a>
+        <button class="btn btn-sm btn-ghost" id="admin-logout-btn" style="font-size:11px;padding:5px 8px;color:rgba(255,255,255,.5);border-color:rgba(255,255,255,.15)">Out</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="admin-content">
+
+    <!-- ─── DASHBOARD VIEW ──────────────────────────────── -->
+    <div id="view-dashboard">
+      <div class="page-header">
+        <h1>Dashboard</h1>
+        <p id="admin-greeting">Overview of all repair activity.</p>
+      </div>
+
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Total Customers</div>
+          <div class="stat-value" id="stat-users">—</div>
+        </div>
+        <div class="stat-card accent">
+          <div class="stat-label">Total Orders</div>
+          <div class="stat-value" id="stat-total">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Pending</div>
+          <div class="stat-value" id="stat-pending">—</div>
+        </div>
+        <div class="stat-card info">
+          <div class="stat-label">In Progress</div>
+          <div class="stat-value" id="stat-inprogress">—</div>
+        </div>
+        <div class="stat-card success">
+          <div class="stat-label">Completed</div>
+          <div class="stat-value" id="stat-completed">—</div>
+        </div>
+      </div>
+
+      <!-- Recent orders preview -->
+      <div class="card">
+        <div class="card-title">🕐 Recent Orders
+          <button class="btn btn-sm btn-ghost" style="margin-left:auto" onclick="showView('orders')">View All →</button>
+        </div>
+        <div id="recent-orders-list"><p style="color:var(--text-muted);font-size:14px">Loading...</p></div>
+      </div>
+    </div>
+
+    <!-- ─── ORDERS VIEW ─────────────────────────────────── -->
+    <div id="view-orders" class="hidden">
+      <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <div>
+          <h1>All Orders</h1>
+          <p>Manage and update repair request statuses.</p>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+          <select id="status-filter" class="status-select" style="padding:8px 12px;font-size:13px">
+            <option value="all">All Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="in_progress">In Progress</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <button class="btn btn-sm btn-ghost" id="refresh-orders-btn">↻ Refresh</button>
+        </div>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>#</th><th>Customer</th><th>Device</th><th>Problem</th>
+                <th>Status</th><th>Date</th><th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="orders-tbody">
+              <tr><td colspan="7" style="text-align:center;padding:32px;color:var(--text-muted)">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── CUSTOMERS VIEW ──────────────────────────────── -->
+    <div id="view-customers" class="hidden">
+      <div class="page-header">
+        <h1>Customers</h1>
+        <p>All registered customer accounts.</p>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Joined</th></tr>
+            </thead>
+            <tbody id="customers-tbody">
+              <tr><td colspan="6" style="text-align:center;padding:32px;color:var(--text-muted)">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- STATUS UPDATE MODAL -->
+<div id="modal-overlay" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--surface);border-radius:var(--radius-lg);padding:32px;width:100%;max-width:440px;box-shadow:var(--shadow-lg)">
+    <h3 style="margin-bottom:6px">Update Order Status</h3>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px" id="modal-subtitle"></p>
+    <div class="form-group">
+      <label for="modal-status">Status</label>
+      <select id="modal-status" class="form-group">
+        <option value="pending">Pending</option>
+        <option value="in_progress">In Progress</option>
+        <option value="completed">Completed</option>
+        <option value="cancelled">Cancelled</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="modal-notes">Admin Notes <span style="font-weight:400;color:var(--text-muted)">(optional)</span></label>
+      <textarea id="modal-notes" placeholder="Leave a note for the customer..." style="min-height:80px"></textarea>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button class="btn btn-ghost" id="modal-cancel">Cancel</button>
+      <button class="btn btn-primary" id="modal-save">
+        <span class="btn-label">Save</span>
+        <span class="spinner hidden" id="modal-spinner"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="../scripts/admin.js"></script>
+</body>
+</html>

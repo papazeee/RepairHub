@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RepairHub — Dashboard</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a class="logo" href="dashboard.html">🔧 Repair<span class="dot">Hub</span></a>
+  <div class="topbar-spacer"></div>
+  <nav style="display:flex;gap:6px;margin-right:12px">
+    <a href="dashboard.html" class="btn btn-sm btn-primary">New Request</a>
+    <a href="my-orders.html" class="btn btn-sm btn-ghost">My Orders</a>
+    <a href="profile.html" class="btn btn-sm btn-ghost">Profile</a>
+  </nav>
+  <div class="user-chip">
+    <div class="avatar" id="user-avatar">?</div>
+    <span id="user-name" style="font-size:14px;font-weight:500;color:var(--text-muted)"></span>
+    <button class="btn btn-sm btn-ghost" id="logout-btn">Logout</button>
+  </div>
+</nav>
+
+<div class="page-wrapper">
+  <div class="page-header">
+    <h1>Request a Repair</h1>
+    <p id="greeting">Tell us what's broken and we'll fix it.</p>
+  </div>
+
+  <!-- Step Progress -->
+  <div class="step-progress" id="step-progress">
+    <div class="step-dot active" id="dot-1">1</div>
+    <div class="step-line" id="line-1"></div>
+    <div class="step-dot" id="dot-2">2</div>
+    <div class="step-line" id="line-2"></div>
+    <div class="step-dot" id="dot-3">3</div>
+    <div class="step-line" id="line-3"></div>
+    <div class="step-dot" id="dot-4">4</div>
+  </div>
+
+  <!-- STEP 1: Device Type -->
+  <div class="card animate-in" id="step-device">
+    <div class="card-title">📦 Select Device Type</div>
+    <div class="device-grid">
+      <div class="device-tile" data-type="phone">
+        <div class="tile-icon">📱</div>Phone
+      </div>
+      <div class="device-tile" data-type="laptop">
+        <div class="tile-icon">💻</div>Laptop
+      </div>
+      <div class="device-tile" data-type="tablet">
+        <div class="tile-icon">📟</div>Tablet
+      </div>
+      <div class="device-tile" data-type="desktop">
+        <div class="tile-icon">🖥️</div>Desktop
+      </div>
+      <div class="device-tile" data-type="other">
+        <div class="tile-icon">🔧</div>Other
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Brand -->
+  <div class="card animate-in hidden" id="step-brand">
+    <div class="card-title">🏷️ Select Brand</div>
+    <div class="brand-grid" id="brand-grid"></div>
+    <div style="margin-top:14px">
+      <button class="btn btn-ghost btn-sm" id="back-to-device">← Back</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Model -->
+  <div class="card animate-in hidden" id="step-model">
+    <div class="card-title">📐 Select Model</div>
+    <div class="form-group">
+      <label for="model-select">Model</label>
+      <select id="model-select">
+        <option value="">Choose your model...</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label style="display:flex;align-items:center;gap:8px;font-weight:400;cursor:pointer">
+        <input type="checkbox" id="other-model-chk" style="width:auto">
+        My model isn't listed
+      </label>
+    </div>
+    <div class="form-group hidden" id="custom-model-group">
+      <label for="custom-model">Enter model name</label>
+      <input id="custom-model" type="text" placeholder="e.g. iPhone 13 Mini">
+    </div>
+    <div style="display:flex;gap:10px;margin-top:8px">
+      <button class="btn btn-ghost btn-sm" id="back-to-brand">← Back</button>
+      <button class="btn btn-primary btn-sm" id="next-to-problem">Next →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: Problem -->
+  <div class="card animate-in hidden" id="step-problem">
+    <div class="card-title">📝 Describe the Problem</div>
+    <div id="request-summary-bar" style="padding:12px 16px;background:var(--brand-light);border-radius:8px;font-size:13px;font-weight:500;margin-bottom:18px;color:var(--brand-dark)"></div>
+    <div class="form-group">
+      <label for="problem-desc">Problem Description</label>
+      <textarea id="problem-desc" placeholder="Describe the issue in detail..."></textarea>
+    </div>
+    <div class="form-group">
+      <label style="display:flex;align-items:center;gap:8px;font-weight:400;cursor:pointer">
+        <input type="checkbox" id="not-sure-chk" style="width:auto">
+        I'm not sure what's wrong — needs diagnosis
+      </label>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:8px">
+      <button class="btn btn-ghost btn-sm" id="back-to-model">← Back</button>
+      <button class="btn btn-primary" id="submit-btn">
+        <span class="btn-label">Submit Request</span>
+        <span class="spinner hidden" id="submit-spinner"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Confirmation -->
+  <div class="card animate-in hidden" id="step-confirm">
+    <div style="text-align:center;padding:20px 0">
+      <div style="font-size:52px;margin-bottom:16px">✅</div>
+      <h2 style="color:var(--success);margin-bottom:8px">Request Submitted!</h2>
+      <p style="color:var(--text-muted);margin-bottom:24px">We'll get back to you shortly.</p>
+      <div id="confirm-details" style="background:var(--bg);border-radius:10px;padding:20px;text-align:left;font-size:14px;margin-bottom:24px;border:1px solid var(--border)"></div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-primary" id="new-request-btn">New Request</button>
+        <a href="my-orders.html" class="btn btn-ghost">View My Orders →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="../scripts/dashboard.js"></script>
+</body>
+</html>

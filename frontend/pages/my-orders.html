@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RepairHub — My Orders</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+
+<nav class="topbar">
+  <a class="logo" href="dashboard.html">🔧 Repair<span class="dot">Hub</span></a>
+  <div class="topbar-spacer"></div>
+  <nav style="display:flex;gap:6px;margin-right:12px">
+    <a href="dashboard.html" class="btn btn-sm btn-ghost">New Request</a>
+    <a href="my-orders.html" class="btn btn-sm btn-primary">My Orders</a>
+    <a href="profile.html" class="btn btn-sm btn-ghost">Profile</a>
+  </nav>
+  <div class="user-chip">
+    <div class="avatar" id="user-avatar">?</div>
+    <button class="btn btn-sm btn-ghost" id="logout-btn">Logout</button>
+  </div>
+</nav>
+
+<div class="page-wrapper">
+  <div class="page-header">
+    <h1>My Repair Orders</h1>
+    <p>Track the status of all your submitted requests.</p>
+  </div>
+
+  <!-- Filter bar -->
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
+    <button class="btn btn-sm btn-primary filter-btn active" data-status="all">All</button>
+    <button class="btn btn-sm btn-ghost filter-btn" data-status="pending">Pending</button>
+    <button class="btn btn-sm btn-ghost filter-btn" data-status="in_progress">In Progress</button>
+    <button class="btn btn-sm btn-ghost filter-btn" data-status="completed">Completed</button>
+  </div>
+
+  <div id="orders-container">
+    <div class="empty-state">
+      <div class="empty-icon">📋</div>
+      <h3>Loading orders...</h3>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="../scripts/my-orders.js"></script>
+</body>
+</html>
