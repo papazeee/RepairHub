@@ -97,19 +97,6 @@ python -m http.server 5500
 Email:    admin@repairhub.com
 Password: Admin@1234
 ```
-> ⚠️ Change these after first login in production.
-
----
-
-## 🐘 Production Setup (PostgreSQL)
-
-### 1. Create database
-
-```sql
-CREATE DATABASE repairhub;
-CREATE USER repairhub_user WITH PASSWORD 'your_password';
-GRANT ALL PRIVILEGES ON DATABASE repairhub TO repairhub_user;
-```
 
 ### 2. Update `.env`
 
