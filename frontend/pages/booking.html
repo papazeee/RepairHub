@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RepairHub - Book a Repair</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body class="booking-page">
+  <header class="booking-hero">
+    <a href="home.html">← Back to home</a>
+  </header>
+
+  <main class="booking-shell">
+    <section class="booking-card">
+      <h1>Book a Repair</h1>
+      <p>Tell us what device you have, what problem you’re seeing, and how you want us to contact you. This helps us prepare before you arrive or request pickup.</p>
+
+      <form id="repair-booking-form">
+        <div class="booking-grid">
+          <fieldset class="booking-section booking-fieldset booking-full">
+            <legend>About the device</legend>
+            <p>What make and model is it? For example, Samsung Galaxy S23 or iPhone 14.</p>
+            <div class="form-group">
+              <label for="device-make-model">Make and model</label>
+              <input id="device-make-model" name="device_make_model" type="text" placeholder="e.g. Samsung Galaxy S23, iPhone 14" required>
+            </div>
+          </fieldset>
+
+          <fieldset class="booking-section booking-fieldset">
+            <legend>About the problem</legend>
+            <p>Explain exactly what is wrong, when it started, and whether anything happened before it began.</p>
+            <div class="form-group">
+              <label for="problem-description">What exactly is wrong with it?</label>
+              <textarea id="problem-description" name="problem_description" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="problem-start">When did the problem start?</label>
+              <input id="problem-start" name="problem_start" type="text" placeholder="e.g. yesterday morning" required>
+            </div>
+            <div class="form-group">
+              <label for="problem-trigger">Did anything happen before it started?</label>
+              <textarea id="problem-trigger" name="problem_trigger" rows="4" placeholder="Dropped it, got it wet, installed something, etc."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="problem-change">Is it getting worse or staying the same?</label>
+              <select id="problem-change" name="problem_change" required>
+                <option value="">Select an option</option>
+                <option value="worse">Getting worse</option>
+                <option value="same">Staying the same</option>
+                <option value="better">Getting better</option>
+              </select>
+            </div>
+          </fieldset>
+
+          <fieldset class="booking-section booking-fieldset">
+            <legend>About previous repairs</legend>
+            <p>Let us know if anyone has already opened or repaired the device.</p>
+            <div class="form-group">
+              <label for="previous-repairs">Has it been repaired before, anywhere?</label>
+              <textarea id="previous-repairs" name="previous_repairs" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="opened-before">Has anyone else opened it or attempted to fix it?</label>
+              <select id="opened-before" name="opened_before" required>
+                <option value="">Select an option</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+                <option value="not-sure">Not sure</option>
+              </select>
+            </div>
+          </fieldset>
+
+          <fieldset class="booking-section booking-fieldset booking-full">
+            <legend>About your data</legend>
+            <p>Tell us whether the device is locked so we can test it after repair.</p>
+            <div class="form-group">
+              <label for="device-locked">Is the device locked - do we need a PIN or password to test it after repair?</label>
+              <select id="device-locked" name="device_locked" required>
+                <option value="">Select an option</option>
+                <option value="no">No, it is unlocked</option>
+                <option value="yes">Yes, PIN or password required</option>
+                <option value="will-provide">I will provide access details later</option>
+              </select>
+            </div>
+          </fieldset>
+
+          <fieldset class="booking-section booking-fieldset booking-full">
+            <legend>About the booking</legend>
+            <p>Choose how you want to get the device to us and how you want updates.</p>
+            <div class="booking-grid">
+              <div class="form-group">
+                <label for="booking-method">Are you bringing it in or do you need pickup/delivery?</label>
+                <select id="booking-method" name="booking_method" required>
+                  <option value="">Select an option</option>
+                  <option value="dropoff">I will bring it in</option>
+                  <option value="pickup">I need pickup</option>
+                  <option value="delivery">I need delivery</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contact-method">Best way to reach you with updates</label>
+                <select id="contact-method" name="contact_method" required>
+                  <option value="">Select an option</option>
+                  <option value="call">Call</option>
+                  <option value="whatsapp">WhatsApp</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="contact-details">Phone number or WhatsApp number</label>
+              <input id="contact-details" name="contact_details" type="tel" placeholder="e.g. +233 55 264 3991" required>
+            </div>
+            <div class="form-group">
+              <label for="additional-notes">Anything else we should know?</label>
+              <textarea id="additional-notes" name="additional_notes" rows="4" placeholder="Optional notes about symptoms, timing, or special instructions"></textarea>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="booking-actions">
+          <a href="home.html" class="btn btn-ghost">Cancel</a>
+          <button type="submit" class="btn btn-primary">Submit Booking Request</button>
+        </div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

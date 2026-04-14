@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RepairHub - Device Repair</title>
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+
+<header class="home-header">
+  <div class="home-topbar">
+    <span>Certified Device Repairs</span>
+    <a href="index.html">Sign In</a>
+  </div>
+
+  <nav class="home-nav" aria-label="Main navigation">
+    <a class="home-logo" href="home.html">🔧 Repair<span class="dot">Hub</span></a>
+    <button class="home-menu-btn" id="home-menu-btn" aria-expanded="false" aria-controls="home-nav-links">☰</button>
+
+    <ul class="home-nav-links" id="home-nav-links">
+      <li class="home-nav-item has-dropdown">
+        <button class="home-nav-trigger" type="button">Services ▾</button>
+        <div class="home-dropdown">
+          <a href="#booking">Screen Repair</a>
+          <a href="#booking">Battery Replacement</a>
+          <a href="#booking">Water Damage Repair</a>
+          <a href="#services">Diagnostics</a>
+        </div>
+      </li>
+      <li class="home-nav-item has-dropdown">
+        <button class="home-nav-trigger" type="button">Device Types ▾</button>
+        <div class="home-dropdown">
+          <a href="#booking">Phones</a>
+          <a href="#booking">Laptops</a>
+          <a href="#booking">Tablets</a>
+          <a href="#booking">Smart Watches</a>
+        </div>
+      </li>
+      <li class="home-nav-item has-dropdown">
+        <button class="home-nav-trigger" type="button">Support ▾</button>
+        <div class="home-dropdown">
+          <a href="#process">How It Works</a>
+          <a href="#why-us">Warranty Policy</a>
+          <a href="#footer-links">Contact Options</a>
+        </div>
+      </li>
+      <li class="home-nav-item"><a href="index.html">Sign Up</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="home-hero">
+    <div class="home-hero-content">
+      <span class="home-hero-kicker">Fast, Trusted, Professional</span>
+      <h1>Professional Mobile Repair For Every Major Brand</h1>
+      <p>Book certified diagnostics and repairs in minutes. Transparent pricing, genuine parts, and expert technicians.</p>
+      <div class="home-hero-actions">
+        <a href="booking.html" class="btn btn-primary">Book Repair</a>
+        <a href="#process" class="btn btn-ghost">How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-booking card" id="booking">
+    <div class="card-title">📅 Start Your Booking</div>
+    <form class="home-booking-grid" id="booking-form">
+      <div class="form-group">
+        <label for="device-type">Device Type</label>
+        <select id="device-type" required>
+          <option value="">Select a device</option>
+          <option value="phone">Phone</option>
+          <option value="laptop">Laptop</option>
+          <option value="tablet">Tablet</option>
+          <option value="watch">Smart Watch</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="service-type">Repair Service</label>
+        <select id="service-type" required>
+          <option value="">Select a service</option>
+          <option value="screen">Screen Replacement</option>
+          <option value="battery">Battery Replacement</option>
+          <option value="charging">Charging Port Repair</option>
+          <option value="diagnostics">General Diagnostics</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="device-brand">Brand</label>
+        <input id="device-brand" type="text" placeholder="e.g. Samsung, Apple" required>
+      </div>
+      <div class="home-booking-action">
+        <button type="submit" class="btn btn-primary btn-full">Proceed To Booking</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="home-section" id="why-us">
+    <div class="page-header">
+      <h2>Why Choose Us</h2>
+      <p>Trusted by thousands of customers for reliable repairs and support.</p>
+    </div>
+    <div class="home-feature-grid">
+      <article class="card home-feature-card">
+        <div class="home-feature-icon">🛡️</div>
+        <h3>Reliability</h3>
+        <p>Every repair follows a strict quality checklist and includes warranty coverage.</p>
+      </article>
+      <article class="card home-feature-card">
+        <div class="home-feature-icon">🧰</div>
+        <h3>Expertise</h3>
+        <p>Skilled technicians trained across multiple brands and device models.</p>
+      </article>
+      <article class="card home-feature-card">
+        <div class="home-feature-icon">⚡</div>
+        <h3>Speed</h3>
+        <p>Most common repairs completed the same day with status updates included.</p>
+      </article>
+      <article class="card home-feature-card">
+        <div class="home-feature-icon">💬</div>
+        <h3>Customer Support</h3>
+        <p>Clear communication before, during, and after service with friendly support.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="home-section" id="services">
+    <div class="page-header">
+      <h2>Service Highlights</h2>
+      <p>Comprehensive repair coverage for your essential devices.</p>
+    </div>
+    <div class="home-highlight-grid">
+      <div class="card"><h3>Screen Repairs</h3><p>Cracked screens, display issues, and touch response restoration.</p></div>
+      <div class="card"><h3>Battery Services</h3><p>Battery replacement and health checks for improved runtime.</p></div>
+      <div class="card"><h3>Water Damage</h3><p>Internal cleaning, diagnostics, and recovery from liquid exposure.</p></div>
+      <div class="card"><h3>Software Fixes</h3><p>OS troubleshooting, updates, and performance optimization.</p></div>
+    </div>
+  </section>
+
+  <section class="home-section" id="process">
+    <div class="page-header">
+      <h2>How It Works</h2>
+      <p>A simple four-step journey from issue to resolution.</p>
+    </div>
+    <ol class="home-steps">
+      <li><strong>1. Select Device</strong><span>Tell us your device type and model.</span></li>
+      <li><strong>2. Choose Service</strong><span>Pick the repair type that best matches your issue.</span></li>
+      <li><strong>3. Confirm Booking</strong><span>Choose your preferred time and submit your request.</span></li>
+      <li><strong>4. Get It Fixed</strong><span>Track progress and collect your repaired device.</span></li>
+    </ol>
+  </section>
+</main>
+
+<footer class="home-footer" id="footer-links">
+  <div class="home-footer-grid">
+    <div>
+      <h4>RepairHub</h4>
+      <p>Reliable device repair services with fast turnaround and quality support.</p>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <a href="#services">Screen Repair</a>
+      <a href="#services">Battery Replacement</a>
+      <a href="#services">Diagnostics</a>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <a href="#process">How It Works</a>
+      <a href="index.html">Customer Portal</a>
+      <a href="admin.html">Admin Panel</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <a href="#">uncleochir@gmail.com</a>
+      <a href="#">+233 55 264 3991</a>
+      <a href="#">Teshie Accra</a>
+    </div>
+  </div>
+  <p class="home-footer-copy">© 2026 RepairHub. All rights reserved.</p>
+</footer>
+
+<script type="module" src="../scripts/home.js"></script>
+</body>
+</html>
