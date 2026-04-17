@@ -6,6 +6,28 @@ from app.models.user import User
 from app.models.notification import Notification
 from app.repositories import repair_repository, user_repository
 from app.schemas.repair import RepairRequestIn, StatusUpdateIn, RepairRequestOut
+from app.core.security import hash_password
+
+
+GUEST_EMAIL = "guest@repairhub.local"
+
+
+def _get_guest_user(db: Session) -> User:
+    guest = user_repository.get_by_email(GUEST_EMAIL, db)
+    if guest:
+        return guest
+
+    guest = User(
+        name="Guest",
+        email=GUEST_EMAIL,
+        phone="0000000000",
+        address="Online booking request",
+        password_hash=hash_password("guest-account"),
+        is_admin=False,
+    )
+    db.add(guest)
+    db.flush()
+    return guest
 
 
 def _format(r: RepairRequest, include_customer: bool = False) -> dict:
@@ -27,9 +49,10 @@ def _format(r: RepairRequest, include_customer: bool = False) -> dict:
     return out
 
 
-def create_repair_request(payload: RepairRequestIn, user: User, db: Session) -> dict:
+def create_repair_request(payload: RepairRequestIn, user: User | None, db: Session) -> dict:
+    request_user = user or _get_guest_user(db)
     rr = RepairRequest(
-        user_id=user.id,
+        user_id=request_user.id,
         device_type=payload.device_type,
         brand=payload.brand,
         model=payload.model,
@@ -45,7 +68,7 @@ def create_repair_request(payload: RepairRequestIn, user: User, db: Session) -> 
         notif = Notification(
             admin_id=admin.id,
             title="New Repair Request",
-            message=f"{user.name} submitted a repair for {payload.brand} {payload.model} ({payload.device_type}). Request #{rr.id}.",
+            message=f"{request_user.name} submitted a repair for {payload.brand} {payload.model} ({payload.device_type}). Request #{rr.id}.",
         )
         db.add(notif)
 

@@ -1,7 +1,4 @@
-import { api, requireAuth, toastError, toastSuccess } from './api.js';
-
-const user = requireAuth('login.html');
-if (!user) throw new Error();
+import { api, toastError, toastSuccess } from './api.js';
 
 function inferModel(text) {
   const trimmed = text.trim();

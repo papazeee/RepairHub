@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.core.database import get_db
-from app.core.security import get_current_user, get_current_admin
+from app.core.security import get_current_user, get_current_admin, get_optional_current_user
 from app.schemas.repair import RepairRequestIn, StatusUpdateIn
 from app.services import repair_service
 
@@ -12,7 +12,7 @@ router = APIRouter(prefix="/api", tags=["Repairs"])
 @router.post("/repair-requests")
 def create_request(
     payload: RepairRequestIn,
-    current_user=Depends(get_current_user),
+    current_user=Depends(get_optional_current_user),
     db: Session = Depends(get_db),
 ):
     return repair_service.create_repair_request(payload, current_user, db)

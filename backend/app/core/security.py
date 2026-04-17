@@ -10,6 +10,7 @@ from app.repositories import user_repository
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 security = HTTPBearer()
+optional_security = HTTPBearer(auto_error=False)
 
 
 def hash_password(password: str) -> str:
@@ -48,6 +49,19 @@ async def get_current_user(
     if not user:
         raise HTTPException(status_code=401, detail="User not found.")
     return user
+
+
+async def get_optional_current_user(
+    credentials: HTTPAuthorizationCredentials | None = Depends(optional_security),
+    db: Session = Depends(get_db),
+):
+    if credentials is None:
+        return None
+    payload = decode_token(credentials.credentials)
+    user_id = payload.get("user_id")
+    if not user_id:
+        return None
+    return user_repository.get_by_id(user_id, db)
 
 
 async def get_current_admin(current_user=Depends(get_current_user)):
