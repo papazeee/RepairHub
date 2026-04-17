@@ -41,6 +41,7 @@ def login_user(payload: LoginIn, db: Session) -> TokenOut:
     if not user or not verify_password(payload.password, user.password_hash):
         raise HTTPException(status_code=401, detail="Invalid email or password.")
     token = create_access_token({"user_id": user.id, "email": user.email})
+    print("this is the token", token)
     return TokenOut(access_token=token, user=_user_out(user))
 
 

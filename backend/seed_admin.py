@@ -24,14 +24,14 @@ def seed():
         admin = User(
             name=NAME,
             email=EMAIL,
-            phone="000-000-0000",
+            phone="233 55-264-3991",
             address="Admin Office",
             password_hash=hash_password(PASSWORD),
             is_admin=True,
         )
         db.add(admin)
         db.commit()
-        print(f"✅ Admin created: {EMAIL} / {PASSWORD}")
+        print(f" Admin created: {EMAIL} / {PASSWORD}")
         print("   Change this password")
     finally:
         db.close()

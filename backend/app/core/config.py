@@ -15,7 +15,7 @@ class Settings:
     # Database — set DATABASE_URL in .env for PostgreSQL, leave blank for SQLite fallback
     DATABASE_URL: str = os.getenv(
         "DATABASE_URL",
-        "sqlite:///./repair_shop.db"           # local dev fallback
+        "sqlite:///./repairhub.db"           # local dev fallback
     )
 
     # CORS
