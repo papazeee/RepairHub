@@ -67,7 +67,7 @@ export const toastError   = m => toast(m, 'error');
 export const toastInfo    = m => toast(m, 'info');
 
 // ── Auth guard ─────────────────────────────────────────
-export function requireAuth(redirectTo = 'index.html') {
+export function requireAuth(redirectTo = 'login.html') {
   const token = getToken();
   const user  = getUser();
   if (!token || !user) {
@@ -77,7 +77,7 @@ export function requireAuth(redirectTo = 'index.html') {
   return user;
 }
 
-export function requireAdmin(redirectTo = 'index.html') {
+export function requireAdmin(redirectTo = 'login.html') {
   const user = requireAuth(redirectTo);
   if (!user) return false;
   if (!user.is_admin) {

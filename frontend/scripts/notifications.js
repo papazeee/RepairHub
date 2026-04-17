@@ -1,6 +1,6 @@
 import { api, requireAdmin, clearToken, toastSuccess, toastError, formatDate } from './api.js';
 
-const admin = requireAdmin('index.html');
+const admin = requireAdmin('login.html');
 if (!admin) throw new Error();
 
 document.getElementById('admin-avatar').textContent = (admin.name || 'A')[0].toUpperCase();
@@ -8,7 +8,7 @@ document.getElementById('admin-name').textContent = admin.name || 'Admin';
 
 document.getElementById('logout-btn').addEventListener('click', () => {
   clearToken();
-  window.location.href = 'index.html';
+  window.location.href = 'login.html';
 });
 
 function renderItems(items) {

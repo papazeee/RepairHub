@@ -9,43 +9,70 @@ Customers submit repair orders; admins track and update their status.
 
 ```
 repairshop/
+├── .vscode/
+│   └── settings.json
 ├── backend/
 │   ├── app/
 │   │   ├── core/
+│   │   │   ├── __init__.py
 │   │   │   ├── config.py        # App settings & env vars
-│   │   │   ├── database.py      # SQLAlchemy engine (SQLite/PostgreSQL)
-│   │   │   └── security.py      # JWT auth, password hashing (bcrypt)
+│   │   │   ├── database.py      # SQLAlchemy engine/session
+│   │   │   └── security.py      # JWT auth, password hashing
 │   │   ├── models/
-│   │   │   ├── user.py
+│   │   │   ├── __init__.py
+│   │   │   ├── notification.py
 │   │   │   ├── repair_request.py
-│   │   │   └── notification.py
-│   │   ├── schemas/
+│   │   │   └── user.py
+│   │   ├── repositories/
+│   │   │   ├── __init__.py
+│   │   │   ├── notification_repository.py
+│   │   │   ├── repair_repository.py
+│   │   │   └── user_repository.py
+│   │   ├── routes/
+│   │   │   ├── __init__.py
 │   │   │   ├── auth.py
-│   │   │   ├── repair.py
-│   │   │   └── notification.py
+│   │   │   ├── notifications.py
+│   │   │   └── repairs.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── auth.py
+│   │   │   ├── notification.py
+│   │   │   └── repair.py
 │   │   ├── services/
+│   │   │   ├── __init__.py
 │   │   │   ├── auth_service.py
-│   │   │   ├── repair_service.py
-│   │   │   └── notification_service.py
-│   │   └── routes/
-│   │       ├── auth.py
-│   │       ├── repairs.py
-│   │       └── notifications.py
+│   │   │   ├── notification_service.py
+│   │   │   └── repair_service.py
+│   │   └── __init__.py
+│   ├── .env.example
 │   ├── main.py                  # FastAPI app entrypoint
-│   ├── seed_admin.py            # Creates default admin account
 │   ├── requirements.txt
-│   └── .env.example
-│
-└── frontend/
-    ├── pages/
-    │   ├── index.html           # Customer login / register
-    │   ├── dashboard.html       # Multi-step repair request form
-    │   ├── my-orders.html       # Customer order tracking
-    │   └── admin.html           # Admin panel (login + dashboard)
-    ├── styles/
-    │   └── main.css             # Shared stylesheet
-    └── scripts/
-        └── api.js               # API helpers, auth, toasts (ES module)
+│   ├── run.py
+│   └── seed_admin.py            # Creates default admin account
+├── frontend/
+│   ├── pages/
+│   │   ├── admin.html
+│   │   ├── booking.html
+│   │   ├── dashboard.html
+│   │   ├── home.html
+│   │   ├── login.html
+│   │   ├── my-orders.html
+│   │   ├── notifications.html
+│   │   └── profile.html
+│   ├── scripts/
+│   │   ├── admin.js
+│   │   ├── api.js
+│   │   ├── dashboard.js
+│   │   ├── home.js
+│   │   ├── index.js
+│   │   ├── my-orders.js
+│   │   ├── notifications.js
+│   │   └── profile.js
+│   └── styles/
+│       └── main.css
+├── index.html
+├── LICENSE
+└── README.md
 ```
 
 ---
@@ -80,16 +107,16 @@ Interactive docs: http://127.0.0.1:8000/docs
 
 ### 2. Frontend
 
-Open `frontend/pages/index.html` with a local server:
+Open `frontend/pages/login.html` with a local server:
 
 ```bash
 # Option A: VS Code Live Server extension (recommended)
-# Right-click index.html → "Open with Live Server"
+# Right-click login.html → "Open with Live Server"
 
 # Option B: Python
 cd frontend
 python -m http.server 5500
-# Open http://localhost:5500/pages/index.html
+# Open http://localhost:5500/pages/login.html
 ```
 
 ### Default Admin Credentials
@@ -115,7 +142,7 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### Auth
 | Method | Endpoint | Description |

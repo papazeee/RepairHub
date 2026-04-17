@@ -1,6 +1,6 @@
 import { api, requireAuth, clearToken, toastSuccess, toastError, formatDate, deviceIcon } from './api.js';
 
-const user = requireAuth('index.html');
+const user = requireAuth('login.html');
 if (!user) throw new Error();
 
 document.getElementById('user-name').textContent = user.name;
@@ -8,7 +8,7 @@ document.getElementById('user-avatar').textContent = user.name[0].toUpperCase();
 document.getElementById('greeting').textContent = `Hello, ${user.name.split(' ')[0]}! What needs fixing today?`;
 document.getElementById('logout-btn').addEventListener('click', () => {
   clearToken();
-  window.location.href = 'index.html';
+  window.location.href = 'login.html';
 });
 
 const state = { device_type: null, brand: null, model: null, problem_description: null };

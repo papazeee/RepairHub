@@ -1,12 +1,12 @@
 import { api, requireAuth, clearToken, formatDate, badgeHTML, deviceIcon } from './api.js';
 
-const user = requireAuth('index.html');
+const user = requireAuth('login.html');
 if (!user) throw new Error();
 
 document.getElementById('user-avatar').textContent = user.name[0].toUpperCase();
 document.getElementById('logout-btn').addEventListener('click', () => {
   clearToken();
-  window.location.href = 'index.html';
+  window.location.href = 'login.html';
 });
 
 let allOrders = [];
