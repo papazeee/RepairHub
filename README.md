@@ -140,6 +140,16 @@ python seed_admin.py
 uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
+### Railway deployment
+
+Railway injects a `PORT` environment variable at runtime. Use a start command like:
+
+```bash
+uvicorn main:app --host 0.0.0.0 --port $PORT
+```
+
+If you run the bundled entrypoint instead, it now falls back to `PORT` automatically and uses `8000` locally when `PORT` is not set.
+
 ---
 
 ## API Endpoints
