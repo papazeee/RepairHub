@@ -50,7 +50,7 @@ repairshop/
 
 ---
 
-## ⚡ Quick Start — Local (SQLite)
+##  Quick Start — Local (SQLite)
 
 ### 1. Backend
 
@@ -143,7 +143,7 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 
 ---
 
-## ✅ Features
+## Features
 
 - JWT authentication (bcrypt password hashing)
 - Customer: register, login, submit repair orders, track status
@@ -155,7 +155,7 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 
 ---
 
-## 🔒 Security Notes
+## Security Notes
 
 - Passwords hashed with **bcrypt** (not plain SHA256)
 - JWT tokens expire after 24 hours (configurable)
