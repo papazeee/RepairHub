@@ -1,1 +1,1 @@
-web: cd backend && python wsgi.py
+web: cd backend && python3 wsgi.py
