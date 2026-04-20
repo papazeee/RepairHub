@@ -32,6 +32,11 @@ def root():
     return {"service": settings.APP_NAME, "version": settings.VERSION, "status": "ok"}
 
 
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+
 if __name__ == "__main__":
     import uvicorn
     port = int(os.getenv("PORT", "8000"))
